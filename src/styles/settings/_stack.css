@@ -1,0 +1,50 @@
+/* ======================================================
+//
+//  MARK: 　z-index
+//  サイト全体で使用する `z-index` の定義を行います。
+//
+//  `z-index`は原則的には次のように管理します。
+//  - その`z-index`が絶対的なもの(固定配置のコンテンツやドロワーなどの重ね順など)か相対的なもの(コンポーネントルートを基準とした重ね順など)かに分ける
+//  - 絶対的な`z-index`は 10 の倍数で グローバル変数で管理する。
+//  - 相対的な`z-index`は原則的に`z-index`は使わずに DOM の順番で制御する。指定する必要がある場合は 1(前面) か -1(背面) のみ使用する。
+//  - コンポーネント同士の衝動を防ぐために相対的な`z-index`を含むコンポーネントの body には`isolation:isolate`を指定してスタッキングコンテキストを生成しておく。
+//  - モーダルやローディングなどの絶対表面に出す必要がある要素には`z-index:calc(infinity)`を指定する
+//
+//  ルールを厳守するため、`z-index: 1` `z-index: -1` も含めてグローバル変数で定義されたカスタムプロパティのみをLintを使用し縛るようにします。
+//
+// ====================================================== */
+@property --stack-top {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: calc(infinity);
+}
+
+@property --stack-skip-link {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 30;
+}
+
+@property --stack-header {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 20;
+}
+
+@property --stack-footer {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 10;
+}
+
+@property --stack-forwards {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --stack-backwards {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: -1;
+}

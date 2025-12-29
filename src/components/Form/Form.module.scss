@@ -1,0 +1,91 @@
+.checkBoxLabel {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  cursor: pointer;
+}
+.checkBox {
+  position: relative;
+  display: inline-block;
+  inline-size: 24px;
+  block-size: 24px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  appearance: none;
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 1px;
+    inset-inline-start: 7px;
+    inline-size: 9px;
+    block-size: 15px;
+    border-block-end: 3px solid #fff;
+    border-inline-end: 3px solid #fff;
+    transform: rotate(50deg);
+  }
+
+  &:checked {
+    background: #000;
+  }
+  &:checked::before {
+    opacity: 1;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-block-end: 24px;
+}
+
+.error {
+  margin-block-start: 4px;
+  color: #ff0000;
+}
+
+.input,
+.textarea {
+  inline-size: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #eee;
+}
+
+.input:disabled,
+.textarea:disabled {
+  background-color: var(--color-monotone-gray);
+  cursor: not-allowed;
+}
+
+.input {
+  block-size: 44px;
+}
+
+.textarea {
+  block-size: 132px;
+  resize: block;
+}
+
+.formWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-block-start: 40px;
+}
+
+.button {
+  display: block;
+  margin-inline: auto;
+  padding: 8px 32px;
+  background-color: #000;
+  color: #fff;
+}
+.radioLabel {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  cursor: pointer;
+}

@@ -1,0 +1,23 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.markuplint": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "stylelint.validate": ["css", "scss"],
+  // eslintはデフォルトでastroファイルをサポートしていないので追加
+  // js(x), ts(x), astroファイルでtailwindcss classの並び替えのためにeslintを使用する
+  "eslint.validate": ["javascript", "typescript", "astro", "javascriptreact", "typescriptreact"],
+  "markuplint.enable": true
+}

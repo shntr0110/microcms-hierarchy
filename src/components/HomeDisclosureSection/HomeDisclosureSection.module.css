@@ -1,0 +1,27 @@
+.HomeDisclosureSection {
+  --_gutter: clamp(16px, 5cqi, 40px);
+  container: home-disclosure-section / inline-size;
+}
+
+._body {
+  display: block grid;
+  grid-template-columns:
+    [full-start] minmax(var(--_gutter), 1fr) [content-start]
+    minmax(auto, var(--container-width-narrow))
+    [content-end] minmax(var(--_gutter), 1fr) [full-end];
+  row-gap: var(--spacing-4);
+
+  & > :where(._heading) {
+    grid-column: full;
+  }
+
+  & > :where(._main) {
+    grid-column: content;
+  }
+}
+
+._heading {
+  font-size: 1.5em;
+  text-align: center;
+  text-wrap: balance;
+}

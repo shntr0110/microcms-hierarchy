@@ -1,0 +1,62 @@
+.openBtn {
+  inline-size: 200px;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  &:focus-visible {
+    background-color: blue;
+  }
+  &:where(:any-link, :enabled, summary) {
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: blue;
+      }
+    }
+  }
+}
+.red {
+  background: red;
+  color: #fff;
+}
+.dialog {
+  position: fixed;
+  inset-block: 0;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: 80%;
+  max-inline-size: 500px;
+  padding: 20px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: white;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog[open] {
+  animation-name: fadeIn;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+
+::backdrop {
+  background: rgba(0, 0, 0, 0.5); // 🔥 背景を半透明に
+  animation: fadeIn 300ms ease-out;
+}
+
+.closeBtn {
+  position: absolute;
+  inset-block-start: 16px;
+  inset-inline-end: 16px;
+}

@@ -1,0 +1,22 @@
+---
+import styles from './Header.module.scss'
+import Drawer from '@/components/Drawer/Drawer'
+
+const url = Astro.request.url
+const isTopPage = new URL(url).pathname === '/'
+---
+
+<header id="header" class={styles.header}>
+  {
+    isTopPage ? (
+      <h1 class={styles.logo}>
+        <img src="/images/common/logo.svg" alt="サイトロゴ" width="100" height="30" />
+      </h1>
+    ) : (
+      <div class={styles.logo}>
+        <img src="/images/common/logo.svg" alt="サイトロゴ" width="100" height="30" />
+      </div>
+    )
+  }
+  <Drawer client:load />
+</header>

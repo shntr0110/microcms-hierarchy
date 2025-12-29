@@ -1,0 +1,45 @@
+/* ======================================================
+//
+//  MARK: グローバルスタイル
+//
+//  サイト全体に適用するスタイルを定義します。
+//  `@layer` を用いて、以下の CSS レイヤーを定義し、該当するレイヤーにスタイルを追加してください。
+//  - settings: グローバルなカスタムプロパティやキーフレームの設定（レイヤーの指定は無しでOK）
+//  - reset: ブラウザの CSS 調整やベースのスタイル
+//  - elements: 基本的な要素のスタイル
+//  - utilities: ユーティリティクラス（上書きを確実にするために`!important`を付与します。カスケードレイヤー下では`!important`の優先度が反転するため、この位置に配置してください）
+//  - template: ページ全体のレイアウトを定義するスタイル
+//  - vendors: ライブラリやフレームワークのスタイル
+//  - components: ページを構成する再利用可能なパーツのスタイル
+//
+// ====================================================== */
+
+@layer reset, elements, utilities, components;
+
+/* ======================================================
+//	settings
+// ====================================================== */
+@import url('settings/_animation.css');
+@import url('settings/_borders.css');
+@import url('settings/_color.css');
+@import url('settings/_keyframes.css');
+@import url('settings/_shapes.css');
+@import url('settings/_sizes.css');
+@import url('settings/_stack.css');
+@import url('settings/_typography.css');
+/* @import url('settings/_view-transition.css'); */
+
+/* ======================================================
+//	Reset
+// ====================================================== */
+@import url('base/_reset.css') layer(reset);
+
+/* ======================================================
+//	Elements
+// ====================================================== */
+@import url('base/_elements.css') layer(elements);
+
+/* ======================================================
+//	Utilities
+// ====================================================== */
+@import url('utilities/_visually-hidden.css') layer(utilities);

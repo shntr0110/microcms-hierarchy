@@ -1,0 +1,136 @@
+/* ======================================================
+//
+//  MARK: タイポグラフィ
+//
+//  このセクションでは、サイト全体で使用するタイポグラフィに関する定義を行います。
+//
+// ====================================================== */
+
+/* ======================================================
+//  MARK: font-family
+// ====================================================== */
+@property --font-gothic {
+  syntax: '*';
+  inherits: false;
+  initial-value:
+    'Helvetica Neue', arial, 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', meiryo,
+    sans-serif;
+}
+
+@property --font-latin {
+  syntax: '*';
+  inherits: false;
+  initial-value: 'Literata', serif;
+}
+
+/* ======================================================
+//  MARK: font-size
+// ====================================================== */
+
+/* ------------------------------------------------------
+//  `rem`のベースとなるフォントサイズ
+*/
+@property --font-size-root {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 16px;
+}
+
+/* ======================================================
+//  MARK: font-weight
+// ====================================================== */
+@property --font-medium {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 500;
+}
+
+@property --font-bold {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 700;
+}
+
+/* ======================================================
+//  MARK: line-height
+// ====================================================== */
+@property --leading-tight {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1.25;
+}
+
+@property --leading-normal {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1.5;
+}
+
+@property --leading-relaxed {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1.75;
+}
+
+@property --leading-loose {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 2;
+}
+
+/* ======================================================
+//  MARK: letter-spacing
+// ====================================================== */
+@property --tracking-wider {
+  syntax: '*';
+  inherits: false;
+  initial-value: 0.05em;
+}
+
+/* ======================================================
+//  MARK: :root
+//
+//  カスタムプロパティを経由する変数の設定
+// ====================================================== */
+:root {
+  /* ------------------------------------------------------
+  //  `calc`関数で number を `rem` に変換するためのカスタムプロパティ。
+  */
+  --to-rem: calc(tan(atan2(1px, var(--font-size-root))) * 1rem);
+
+  /* ------------------------------------------------------
+  //  デザインで定義されているフォントサイズのトークン
+  //  `clamp`関数を使用して、fluidなフォントサイズを定義します。
+  //  slope の計算はジェネレーターを利用して計算します。
+  //
+  //  @use https://clamp.font-size.app/
+  */
+  --font-size-lg: clamp(16 * var(--rem), 0.956rem + 0.1878dvi, 18 * var(--rem));
+  --font-size-base: clamp(14 * var(--rem), 0.831rem + 0.1878dvi, 16 * var(--rem));
+  --font-size-sm: clamp(12 * var(--rem), 0.706rem + 0.1878dvi, 14 * var(--rem));
+  --font-size-xs: clamp(10 * var(--rem), 0.581rem + 0.1878dvi, 12 * var(--rem));
+
+  --font-size-headline-en: calc(80 * var(--rem));
+  --font-size-headline-l: calc(48 * var(--rem));
+  --font-size-headline-m: calc(32 * var(--rem));
+  --font-size-headline-s: calc(24 * var(--rem));
+  --font-size-headline-xs: calc(20 * var(--rem));
+  /* ------------------------------------------------------
+  //  本文のフォントサイズのトークン
+  */
+  --font-size-body-l: calc(18 * var(--rem));
+  --font-size-body-m: calc(16 * var(--rem));
+  --font-size-body-s: calc(14 * var(--rem));
+
+  @media (width < 768px) {
+    --font-size-headline-en: calc(40 * var(--rem));
+    --font-size-headline-l: calc(32 * var(--rem));
+    --font-size-headline-m: calc(20 * var(--rem));
+    --font-size-headline-s: calc(18 * var(--rem));
+    --font-size-headline-xs: calc(18 * var(--rem));
+
+    --font-size-body-l: calc(16 * var(--rem));
+    --font-size-body-m: calc(14 * var(--rem));
+    --font-size-body-s: calc(12 * var(--rem));
+  }
+}

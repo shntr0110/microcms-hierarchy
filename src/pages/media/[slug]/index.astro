@@ -1,0 +1,41 @@
+---
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.astro'
+import Footer from '@/components/Footer/Footer.astro'
+import Header from '@/components/Header/Header.astro'
+import Layout from '@/layouts/Layout.astro'
+import styles from './index.module.css'
+import { Image } from 'astro:assets'
+import { formatDate } from '@/lib/utils/formatDate'
+
+export async function getStaticPaths() {
+  return [{ params: { slug: 'dummy' } }]
+}
+
+const post = {
+  title: 'スタイルテンプレ',
+  content:
+    '<h2 id="hee83b6efc8">h2のカラー設定はこちらです</h2><h3 id="h4ea12086c3">h3のカラー設定はこちらです。</h3><h3 id="h4ea12086c3">h3のカラー設定はこちらです。</h3><h4 id="h67d4db9c72">h4のカラー設定はこちらです</h4><p><u>記事の本文テキストがここに入ります。</u>記事の本文テキストがここに入ります。<s>記事の本文テキストがここに入ります。</s>記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。記事の本文テキストがここに入ります。</p><blockquote><p>引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。引用が入ります。</p></blockquote><p><strong><span class="customLabel">ラベルのカラー設定はこちらです</span></strong></p><p></p><table><tbody><tr><th colspan="1" rowspan="1"><p>項目1</p></th><th colspan="1" rowspan="1"><p>項目2</p></th><th colspan="1" rowspan="1"><p>項目3</p></th><th colspan="1" rowspan="1"><p>項目4</p></th></tr><tr><td colspan="1" rowspan="1"><p>項目1</p></td><td colspan="1" rowspan="1"><p>項目2</p></td><td colspan="1" rowspan="1"><p>項目3</p></td><td colspan="1" rowspan="1"><p>項目4</p></td></tr><tr><td colspan="1" rowspan="1"><p>項目1</p></td><td colspan="1" rowspan="1"><p>項目2</p></td><td colspan="1" rowspan="1"><p>項目3</p></td><td colspan="1" rowspan="1"><p>項目4</p></td></tr></tbody></table><ol><li>リスト1</li><li>リスト2</li><li>リスト3</li></ol><ul><li>番号付きリスト1</li><li>番号付きリスト2</li><li>番号付きリスト3</li></ul><p><span class="customMarker">マーカーのカラー設定はこちらです</span></p><p><a href="https://noveltyinc.jp" target="_blank" rel="noopener noreferrer nofollow">テキストリンクのカラー設定はこちらです</a></p><hr>'
+}
+---
+
+<Layout>
+  <Header />
+  <main>
+    <!-- <Breadcrumb
+      itemList={[
+        { name: 'コラム', url: '/column' },
+        { name: post.title, url: '' }
+      ]}
+    /> -->
+    <section>
+      <div class={styles.root}>
+        <div class={styles.container}>
+          <div class={styles.contentWrap}>
+            <div class={styles.columnBody} set:html={post.content} />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

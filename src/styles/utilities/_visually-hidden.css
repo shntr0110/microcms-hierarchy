@@ -1,0 +1,22 @@
+/* ======================================================
+//
+//	MARK: visually-hidden
+//
+//  スクリーンリーダー向けの不可視要素を作成するためのクラスです。
+//  WAI-ARIA 同様に .visuallyHidden は他に手段がないときに補足的に、控えめに、そして慎重に使用してください。
+//
+// ====================================================== */
+
+.visuallyHidden {
+  position: fixed !important;
+  inset: 0 !important;
+  contain: strict !important;
+  visibility: initial !important;
+  inline-size: 4px !important;
+  block-size: 4px !important;
+  margin: unset !important;
+  padding: unset !important;
+  border: unset !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

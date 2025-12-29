@@ -1,0 +1,113 @@
+/* ======================================================
+//
+//  MARK: 色
+//
+//  このセクションでは、サイト全体で使用する色の定義を行います。
+//  原則的にグレースケール以外の色は視覚的均一性のある OKLCH に変換します。
+//  @use [OKLCH Color Picker & Converter](https://oklch.com/)
+//
+// ====================================================== */
+
+/* ======================================================
+//  MARK: カラーパレット
+// ====================================================== */
+
+/* ======================================================
+//  #fff - グレースケール： 最も明るい色
+*/
+@property --color-lightest {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #fff;
+}
+
+/* ======================================================
+//  #1e1e1e - グレースケール： 最も暗い色
+*/
+@property --color-darkest {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #1e1e1e;
+}
+
+/* ======================================================
+//  #f2f2f2 - グレースケール： オフホワイト
+*/
+@property --color-shaded-white {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #f2f2f2;
+}
+
+/* ======================================================
+//  #dfdfdf - グレースケール： ライトグレー
+*/
+@property --color-monotone-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #dfdfdf;
+}
+
+/* ======================================================
+//	#3b82f6 - プライマリカラー：ダークブルー
+*/
+@property --color-primary {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: oklch(0.34 0.0871 245.68);
+}
+
+/* ======================================================
+//  #e8d46e - アクセントカラー：イエロー
+*/
+@property --color-accent {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: oklch(0.87 0.1248 98.44);
+}
+
+/* ======================================================
+//  #2b92f3 - フォーカスリング色： ビビッドレッド
+*/
+@property --color-ring {
+  syntax: '<color> | CanvasText';
+  inherits: true;
+  initial-value: oklch(0.62 0.248 27.69);
+}
+
+/* ======================================================
+//  MARK: background-current
+//
+//  強制カラーモード可ではシステムカラーに置き換える視認可能な背景色として使用するカスタムプロパティを定義します。
+//  主に `currentColor` を指定した`background`を前景色として使用する場合に利用します。
+//  疑似要素などで背景色を前景色として扱う際に指定してください。
+//
+//  ```
+//  .button::after {
+//    content: '';
+//    justify-self: end;
+//    mask-image: url(...);
+//    inline-size: 1em;
+//    aspect-ratio: 1;
+//    background: var(--background-to-foreground);
+//    color: red;
+//	}
+//	```
+*/
+@property --background-to-foreground {
+  syntax: '*';
+  inherits: false;
+  initial-value: conic-gradient(currentColor 0 0), CanvasText;
+}
+
+/* ======================================================
+//  MARK: :root
+//
+//　　カスタムプロパティを経由する変数の設定
+//  `initial-values`にはカスタムプロパティは定義できないため、`:root`に定義します。
+// ====================================================== */
+:root {
+  @media (forced-colors: active) {
+    --color-ring: CanvasText; /* 強制カラーモードでのリング色をCanvasTextに設定 */
+  }
+}

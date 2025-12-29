@@ -1,0 +1,44 @@
+---
+type BreadcrumbItem = {
+  name: string
+  url: string
+}
+
+type BreadcrumbProps = {
+  itemList: BreadcrumbItem[]
+}
+
+// Propsを受け取る
+const { itemList } = Astro.props as BreadcrumbProps
+---
+
+<section class="p-4">
+  <nav>
+    <ol class="flex items-center space-x-2 text-sm text-gray-700">
+      <li>
+        <a href="/" class="hover:underline">ホーム</a>
+        <span class="mx-2">|</span>
+      </li>
+
+      {
+        itemList.map((item, index) => {
+          const isLastItem = index === itemList.length - 1
+          return (
+            <li class={!isLastItem ? 'flex items-center' : undefined}>
+              {isLastItem ? (
+                <span aria-current="page">{item.name}</span>
+              ) : (
+                <>
+                  <a href={item.url} class="hover:underline">
+                    {item.name}
+                  </a>
+                  <span class="mx-2">|</span>
+                </>
+              )}
+            </li>
+          )
+        })
+      }
+    </ol>
+  </nav>
+</section>

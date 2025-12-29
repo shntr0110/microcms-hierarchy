@@ -1,0 +1,60 @@
+/* ======================================================
+//
+//  MARK: ボーダー
+//  このセクションでは、サイト全体で使用するボーダー、角丸、シャドウなどの定義を行います。
+//
+// ====================================================== */
+
+/* ======================================================
+//  MARK: border-radius
+// ====================================================== */
+@property --rounded-sm {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 4px;
+}
+
+@property --rounded-md {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 8px;
+}
+
+@property --rounded-lg {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 16px;
+}
+
+@property --rounded-xl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 24px;
+}
+
+@property --rounded-2xl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 32px;
+}
+
+@property --rounded-3xl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 48px;
+}
+
+@property --rounded-full {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: calc(1px / 0); /* infinityを返すことで絶対に破綻しない角丸を実現します */
+}
+
+/* ======================================================
+//  MARK: box-shadow
+// ====================================================== */
+@property --shadow-normal {
+  syntax: '*';
+  inherits: false;
+  initial-value: 0px 0px 20px 0px oklch(from #333 l c h / 10%);
+}

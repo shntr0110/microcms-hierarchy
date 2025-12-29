@@ -1,0 +1,198 @@
+.columnBody {
+  & > * {
+    @media (width <= 768px) {
+      margin-block-end: var(--spacing-2);
+    }
+    &:not(:last-child) {
+      margin-block-end: var(--spacing-3);
+    }
+  }
+  & h2 {
+    padding-block: var(--spacing-1);
+    font-size: var(--font-size-headline-s);
+    font-weight: 700;
+    background: var(--color-primary);
+    color: var(--color-lightest);
+  }
+
+  & h3 {
+    padding-block-end: var(--spacing-1);
+    background-image: linear-gradient(
+      to right,
+      var(--color-primary) 0,
+      var(--color-primary) 20px,
+      var(--color-monotone-light) 20.000001px,
+      var(--color-monotone-light) 100%
+    );
+    background-position: bottom;
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    font-size: var(--font-size-headline-xs);
+  }
+
+  & h4 {
+    position: relative;
+    padding-inline-start: 12px;
+    font-size: var(--font-size-body-m);
+    font-weight: 700;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 0;
+      display: inline-block;
+      inline-size: 3px;
+      block-size: calc(100% - 8px);
+      background-color: var(--color-primary);
+      transform: translateY(-50%);
+    }
+  }
+
+  & strong {
+    font-weight: 700;
+  }
+
+  & p {
+    font-size: var(--font-size-body-m);
+    line-height: 2;
+  }
+
+  & u {
+    block-size: 3px;
+    border-block-end: 1px solid var(--color-primary);
+    text-decoration: none;
+  }
+
+  & a {
+    padding-block-end: 3px;
+    text-decoration: underline;
+    color: #2348ed;
+  }
+
+  & table {
+    position: relative;
+    inline-size: 100%;
+    max-block-size: 80vb;
+    margin-block-end: 20px;
+    border: none;
+    border: 1px solid #dedede;
+    border-block-end: none;
+    table-layout: fixed;
+    border-collapse: collapse;
+    word-break: break-all;
+
+    @media screen and (max-width: 76.7rem) {
+      inline-size: 100%;
+      max-block-size: 60vb;
+    }
+
+    & th,
+    td {
+      position: relative;
+      z-index: 0;
+      inline-size: max-content;
+      padding: 4px !important;
+      border: none !important;
+      background: #fff;
+      font-size: 16px !important;
+      vertical-align: middle !important;
+      text-align: start;
+
+      @media screen and (max-width: 76.7rem) {
+        padding: 7px !important;
+        font-size: 12px !important;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline-start: 0;
+        z-index: -1;
+        box-sizing: border-box;
+        inline-size: 100%;
+        block-size: 100%;
+        border-block-end: 1px solid #dedede;
+        border-inline-end: 1px solid #dedede;
+      }
+      & p {
+        margin: 0;
+        font-size: 14px;
+        text-align: center;
+
+        @media screen and (max-width: 480px) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    & th {
+      background: var(--sub) !important;
+      font-weight: 500 !important;
+      letter-spacing: 1px;
+    }
+
+    & tr {
+      border-block-end: none !important;
+    }
+
+    & img {
+      display: block;
+      max-inline-size: 80% !important;
+      margin: 10px auto;
+      padding: 0;
+    }
+  }
+
+  & ul {
+    margin: 0 0 20px;
+    padding: 0 0 0 20px;
+    & li {
+      margin: 0 0 8px;
+      list-style: disc;
+      & a {
+        display: inline;
+        border-block-end: 1px solid transparent;
+        color: #3460fb;
+        transition: 0.3s;
+
+        @media (hover: hover) {
+          &:hover {
+            border-block-end: 1px solid #3460fb;
+          }
+        }
+      }
+    }
+  }
+
+  & ol {
+    margin: 0 0 20px;
+    padding: 0 0 0 20px;
+
+    & li {
+      margin: 0 0 8px;
+      list-style: decimal;
+      &::marker {
+        font-weight: 700;
+      }
+    }
+  }
+
+  & img {
+    inline-size: auto;
+    block-size: auto;
+    margin-block-end: 20px;
+    object-fit: contain;
+  }
+
+  & hr {
+    margin-block-end: 20px;
+  }
+
+  & blockquote {
+    margin-block-end: 20px;
+    padding-inline-start: 16px;
+    border-inline-start: 2px solid var(--color-monotone-light);
+  }
+}

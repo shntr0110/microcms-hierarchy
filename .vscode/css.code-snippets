@@ -1,0 +1,105 @@
+{
+  "rem": {
+    "prefix": "rem",
+    "body": ["calc($1 * var(--to-rem))"]
+  },
+  "vw-min": {
+    "prefix": "vw-min",
+    "body": ["calc($1 * var(--to-svi-min))"]
+  },
+  "vw-max": {
+    "prefix": "vw-max",
+    "body": ["calc($1 * var(--to-svi-max))"]
+  },
+  "cqi-min": {
+    "prefix": "cqi-min",
+    "body": ["calc($1 * var(--_fluid-min))"]
+  },
+  "cqi-max": {
+    "prefix": "cqi-max",
+    "body": ["calc($1 * var(--_fluid-max))"]
+  },
+  "init-container": {
+    "prefix": "init-container",
+    "body": [
+      "--_fluid-min: calc(tan(atan2(1px, $1)) * 100cqi);",
+      "--_fluid-max: calc(tan(atan2(1px, $2)) * 100cqi);",
+      "container: $3 / inline-size;"
+    ]
+  },
+  "hoverable": {
+    "prefix": "hoverable",
+    "body": [
+      "&:focus-visible {",
+      "\t$1",
+      "}",
+      "&:where(:any-link, :enabled, summary):hover {",
+      "\t@media (any-hover: hover) {",
+      "\t\t$1",
+      "\t}",
+      "}"
+    ]
+  },
+  "heading": {
+    "prefix": "heading",
+    "body": [
+      "font-weight: var(--font-bold);",
+      "text-align: start;",
+      "text-wrap: pretty;",
+      "font-kerning: normal;",
+      "",
+      "&:lang(ja) {",
+      "\tfont-feature-settings: 'palt';",
+      "\tword-break: auto-phrase;",
+      "}"
+    ]
+  },
+  "paragraph": {
+    "prefix": "paragraph",
+    "body": [
+      "font-size: var(--font-size-base);",
+      "font-weight: var(--font-medium);",
+      "line-height: var(--leading-relaxed);",
+      "letter-spacing: var(--tracking-wider);",
+      "hanging-punctuation: allow-end;"
+    ]
+  },
+  "background-current": {
+    "prefix": "background-current",
+    "body": ["background: var(--background-to-foreground);"]
+  },
+  "#h1": {
+    "prefix": "#h1",
+    "body": [
+      "/* ======================================================",
+      "//",
+      "//  MARK: $1",
+      "//",
+      "// ====================================================== */"
+    ]
+  },
+  "#h2": {
+    "prefix": "#h2",
+    "body": [
+      "/* ======================================================",
+      "//  MARK: $1",
+      "// ====================================================== */"
+    ]
+  },
+  "#h3": {
+    "prefix": "#h3",
+    "body": ["/* ------------------------------------------------------", "//\t$1", "*/"]
+  },
+  "#h4": {
+    "prefix": "#h4",
+    "body": ["/* ----------------------------------", "//\t$1", "*/"]
+  },
+  "#h5": {
+    "prefix": "#h5",
+    "body": ["/*", "// $1", "*/"]
+  },
+  "#h6": {
+    "prefix": "#h6",
+    "body": ["/* $1 */"]
+  }
+}

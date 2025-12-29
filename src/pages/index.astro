@@ -1,0 +1,23 @@
+---
+import Footer from '@/components/Footer/Footer.astro'
+import Header from '@/components/Header/Header.astro'
+import Layout from '../layouts/Layout.astro'
+import HomeDisclosureSection from '@/components/HomeDisclosureSection/HomeDisclosureSection.astro'
+---
+
+<Layout title="astro template" description="astroを用いたテンプレートです">
+  <Header />
+  <main>
+    <HomeDisclosureSection />
+  </main>
+  <Footer />
+  <!-- <script type="module" is:inline>
+  //インターセクションオブザーバーのみjsファイルでpublicから読み込む
+  import { scrollAddClass } from '../scripts/scroll.js'
+
+  // ページが読み込まれたときにscrollAddClassを適用
+  document.addEventListener('DOMContentLoaded', () => {
+    scrollAddClass('testObserver', 'fade-in', '0px', 0.1)
+  })
+</script> -->
+</Layout>

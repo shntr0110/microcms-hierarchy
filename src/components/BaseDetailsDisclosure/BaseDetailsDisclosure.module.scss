@@ -1,0 +1,64 @@
+.BaseDetailsDisclosure {
+  --_duration: var(--duration-default);
+  --_summary-foreground-default: var(--color-lightest);
+  --_summary-foreground-interactive: var(--color-lightest);
+  --_summary-foreground-opened: var(--color-lightest);
+  --_summary-background-default: #c41e3a;
+  --_summary-background-interactive: oklch(from var(--_summary-background-default) calc(l + 0.1) c h);
+  --_summary-background-opened: oklch(from var(--_summary-background-default) calc(l - 0.1) c h);
+  --_content-background: var(--color-shaded-white);
+
+  container: base-disclosure / inline-size;
+}
+
+._summary {
+  display: block grid;
+  grid-template: '. icon' / 1fr max-content;
+  column-gap: 1em;
+  align-items: center;
+  padding: 1em;
+  background-color: var(--_summary-background-default);
+  color: var(--_summary-foreground-default);
+  letter-spacing: var(--tracking-wider);
+  transition-duration: var(--_duration);
+  transition-property: background-color, color;
+
+  &::before,
+  &::after {
+    content: '';
+    grid-area: icon;
+    inline-size: 1em;
+    border-block-end: 1px solid;
+    writing-mode: initial;
+  }
+
+  &::after {
+    rotate: 90deg;
+  }
+
+  &:focus-visible {
+    background-color: var(--_summary-background-interactive);
+    color: var(--_summary-foreground-interactive);
+  }
+
+  &:is(:any-link, :enabled, summary):hover {
+    @media (any-hover: hover) {
+      background-color: var(--_summary-background-interactive);
+      color: var(--_summary-foreground-interactive);
+    }
+  }
+
+  &:is([open] > *) {
+    background-color: var(--_summary-background-opened);
+    color: var(--_summary-foreground-opened);
+  }
+
+  &:is([open] > *)::after {
+    opacity: 0;
+  }
+}
+
+._content {
+  padding: 1em;
+  background-color: var(--_content-background);
+}

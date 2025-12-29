@@ -1,0 +1,18 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Form from '@/components/Form/Form'
+---
+
+<Layout>
+  <div class="inner">
+    <h1>サンプルフォーム</h1>
+    <Form client:load />
+  </div>
+</Layout>
+<style>
+  .inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+</style>

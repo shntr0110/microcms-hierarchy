@@ -1,0 +1,198 @@
+/* ======================================================
+//
+//  MARK: レイアウト
+//
+//  このセクションでは、サイト全体で使用するサイジング、スペーシング、重なり順などのレイアウトに関する定義を行います。
+//
+// ====================================================== */
+
+/* ======================================================
+//  MARK: Viewport　Width
+//
+//  リキッドレイアウトの基準となるデザインカンプの幅を指定します。
+// ====================================================== */
+@property --svi-full {
+  syntax: '<length>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@property --viewport-token-min {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 375px;
+}
+
+@property --viewport-token-max {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1440px;
+}
+
+/* ======================================================
+//  MARK: Container Width
+//
+//  各コンテナの最大幅を指定します。
+// ====================================================== */
+@property --container-width-normal {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1100px;
+}
+
+@property --container-width-wide {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1400px;
+}
+
+@property --container-width-narrow {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 800px;
+}
+
+/* ======================================================
+//  MARK: Spacing
+//
+//  サイト全体で使用する余白の定義を行います。
+// ====================================================== */
+@property --spacing-none {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --spacing-half {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 4px;
+}
+
+@property --spacing-1 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 8px;
+}
+
+@property --spacing-2 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 16px;
+}
+
+@property --spacing-3 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 24px;
+}
+
+@property --spacing-4 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 32px;
+}
+
+@property --spacing-5 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 40px;
+}
+
+@property --spacing-6 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 48px;
+}
+
+@property --spacing-7 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 56px;
+}
+
+@property --spacing-8 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 64px;
+}
+
+@property --spacing-9 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 72px;
+}
+
+@property --spacing-10 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 80px;
+}
+
+@property --spacing-11 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 128px;
+}
+
+@property --spacing-12 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 192px;
+}
+
+@property --spacing-13 {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 256px;
+}
+
+/* ======================================================
+//  MARK: Leading Trim
+//
+//  ハーフレディングを取り除いた余白を算出します。
+//  @see https://www.tak-dcxi.com/article/use-line-height-trim-as-css-variable
+// ====================================================== */
+@property --leading-trim {
+  syntax: '*';
+  inherits: false;
+  initial-value: calc((1em - 1lh) / 2);
+}
+
+/* ======================================================
+//  MARK: :root
+//
+//  カスタムプロパティを経由する変数の設定
+//  `initial-values`にはカスタムプロパティは定義できないため、`:root`に定義します。
+// ====================================================== */
+:root {
+  /* ------------------------------------------------------
+  //  `calc`関数で number を `dvi` に変換するためのカスタムプロパティ。
+  //  `dvi` をそのまま使用するとズーム機能が効かなくなるため、三角関数を使用して `px` 値に変換します。
+  //  `tan(atan2())` は `@property` で `length型` で定義しないと異なる単位で組み合わせた際に機能しないため、`100dvi` は型付けを行います。
+  */
+  --svi-full: 100dvi;
+  --to-svi-min: calc(1px * tan(atan2(var(--svi-full), 1px)) / tan(atan2(var(--viewport-token-min), 1px)));
+  --to-svi-max: calc(1px * tan(atan2(var(--svi-full), 1px)) / tan(atan2(var(--viewport-token-max), 1px)));
+}
+
+/* ======================================================
+// MARK: Leading Trim(英語版）
+//
+// ハーフレディングを取り除いた余白を算出します。
+// 英語の場合はフォントサイズの高さの基準を cap height とします。
+// ====================================================== */
+:lang(en) {
+  --leading-trim: calc((1cap - 1lh) / 2);
+}
+
+/* メディア用のクラス */
+.customLabel {
+  padding: 4px 6px;
+  border-radius: 3px;
+  background: var(--color-primary);
+  color: var(--color-lightest);
+}
+.customMarker {
+  background: linear-gradient(transparent 60%, rgba(255, 251, 146, 1) 60%);
+}

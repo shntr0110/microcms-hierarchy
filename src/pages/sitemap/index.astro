@@ -1,0 +1,16 @@
+---
+import Breadcrumb from 'src/components/Breadcrumb/Breadcrumb.astro'
+
+import Footer from '@/components/Footer/Footer.astro'
+import Header from '@/components/Header/Header.astro'
+
+import Sitemap from '../../components/Sitemap/Sitemap.astro'
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title="Welcome to Astro.">
+  <Header />
+  <Breadcrumb itemList={[{ name: 'サイトマップ', url: '/sitemap' }]} />
+  <Sitemap />
+  <Footer />
+</Layout>

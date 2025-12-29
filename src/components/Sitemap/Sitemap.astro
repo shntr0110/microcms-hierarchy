@@ -1,0 +1,54 @@
+---
+import MenuItem from './MenuItem'
+
+export type MenuType = {
+  name: string
+  path: string
+  children?: MenuType[] // 子要素を持たせるためのプロパティを追加
+}
+
+export const menu: MenuType[] = [
+  {
+    name: 'HOME',
+    path: '/'
+  },
+  {
+    name: 'BLOG',
+    path: '/blog',
+    children: [
+      {
+        name: 'Page 1',
+        path: '/blog/page1'
+      },
+      {
+        name: 'Page 2',
+        path: '/blog/page2'
+      }
+    ]
+  }
+  // さらに他のメインメニュー項目を追加可能
+]
+---
+
+<nav>
+  <ul class="flex gap-5">
+    {
+      menu.map((menuItem) => (
+        <li class="">
+          <a href={menuItem.path} class="">
+            {menuItem.name}
+          </a>
+          {menuItem.children && menuItem.children.length > 0 && (
+            <ul class="ml-4 space-y-2">
+              {menuItem.children.map((childItem) => (
+                <li class="text-sm">
+                  <MenuItem menuItem={childItem} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</nav>

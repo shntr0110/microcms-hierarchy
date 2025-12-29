@@ -1,0 +1,68 @@
+/* ======================================================
+//
+//　　MARK: キーフレーム
+//
+//　　このセクションでは、サイト全体で使用する `@keyframes` の定義を行います。
+//　　`@keyframe` は `from/to` を明示しない場合はブラウザはその要素の既存のスタイルを開始・終了の状態として用います。
+//
+// ====================================================== */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-from-left {
+  from {
+    translate: -100%;
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    translate: 100%;
+  }
+}
+
+@keyframes slide-out-to-left {
+  to {
+    translate: -100%;
+  }
+}
+
+@keyframes slide-out-to-right {
+  to {
+    translate: 100%;
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    translate: 0 100%;
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    translate: 0 -100%;
+  }
+}
+
+@keyframes slide-out-to-bottom {
+  to {
+    translate: 0 100%;
+  }
+}
+
+@keyframes slide-out-to-top {
+  to {
+    translate: 0 -100%;
+  }
+}

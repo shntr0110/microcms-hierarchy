@@ -1,0 +1,58 @@
+{
+  "rules": {
+    "case-sensitive-attr-name": false,
+    "disallowed-element": true,
+    "invalid-attr": true,
+    "required-attr": true,
+    "attr-value-quotes": false,
+    "class-naming": false,
+    "end-tag": false,
+    "id-duplication": true,
+    "doctype": "always",
+    "deprecated-attr": true,
+    "no-empty-palpable-content": false,
+    "attr-duplication": true,
+    "case-sensitive-tag-name": false,
+    "label-has-control": false,
+    "ineffective-attr": false,
+    "no-hard-code-id": false,
+    "require-datetime": true,
+    "required-h1": true,
+    "deprecated-element": true,
+    "required-element": true,
+    "no-use-event-handler-attr": false,
+    "use-list": false,
+    "landmark-roles": false,
+    "wai-aria": true,
+    "character-reference": true,
+    "no-boolean-attr-value": false,
+    "permitted-contents": true,
+    "require-accessible-name": true,
+    "placeholder-label-option": true,
+    "no-default-value": false,
+    "no-refer-to-non-existent-id": true
+  },
+  "extends": [
+    "markuplint:recommended-react"
+  ],
+  "parser": {
+    ".[jt]sx$": "@markuplint/jsx-parser"
+  },
+  "specs": {
+    ".[jt]sx$": "@markuplint/react-spec"
+  },
+  "nodeRules": [
+    {
+      "selector": "picture",
+      "rules": {
+        "permitted-contents": false
+      }
+    },
+    {
+      "selector": "path[transform]",
+      "rules": {
+        "invalid-attr": false
+      }
+    }
+  ]
+}

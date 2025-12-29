@@ -1,0 +1,225 @@
+.root {
+  isolation: isolate;
+
+  /* ------------------------------------------------------
+  //	JS無効環境ではボタンを含め非表示
+  */
+  @media (scripting: none) {
+    display: none;
+  }
+}
+
+.button {
+  --_size: 48px;
+  --_foreground-default: var(--color-primary);
+  --_foreground-hoverable: var(--color-lightest);
+  --_background-default: var(--color-darkest);
+  --_background-hoverable: var(--color-primary);
+  --_border-color-default: var(--color-primary);
+  --_border-color-hoverable: var(--color-lightest);
+  --_background-color: var(--_background-default);
+  --_icon-width: 16px;
+  --_icon-thickness: 2px;
+  --_icon-translate-y-default: 5px;
+  --_icon-translate-y-hoverable: 0;
+  --_icon-translate-y-active: 0;
+  --_icon-rotate-default: 0deg;
+  --_icon-rotate-hoverable: 0deg;
+  --_icon-rotate-active: 45deg;
+  --_icon-center-line: conic-gradient(color-mix(in sRGB, currentColor var(--gradient-alpha), transparent) 0 0) no-repeat
+    center / var(--_icon-width) var(--_icon-thickness);
+
+  position: relative;
+  z-index: var(--stack-foreground);
+  display: block grid;
+  grid-template-areas: 'icon';
+  inline-size: var(--_size);
+  aspect-ratio: 1;
+  border: 1px solid var(--_border-color-default);
+  border-radius: var(--rounded-md);
+  background: var(--_icon-center-line), var(--_background-color);
+  color: var(--_foreground-default);
+  transition-duration: var(--duration-default);
+  transition-property: border-color, background-color, color, --gradient-alpha;
+
+  @media (768px <= width) {
+    --_size: 56px;
+  }
+  & span,
+  &::before,
+  &::after {
+    content: '';
+    grid-area: icon;
+    place-self: center;
+    inline-size: var(--_icon-width);
+    border-block-end: var(--_icon-thickness) solid;
+    transition-duration: inherit;
+    transition-property: translate, rotate;
+  }
+
+  &::before {
+    translate: 0 calc(var(--_icon-translate-y-default) * -1);
+    rotate: var(--_icon-rotate-default);
+  }
+
+  &::after {
+    translate: 0 var(--_icon-translate-y-default);
+    rotate: calc(var(--_icon-rotate-default) * -1);
+  }
+
+  &[aria-expanded='true'] {
+    & span {
+      display: none;
+    }
+    &::before {
+      background: var(--color-lightest);
+      translate: 0 calc(var(--_icon-translate-y-active) * -1);
+      rotate: var(--_icon-rotate-active);
+    }
+
+    &::after {
+      translate: 0 var(--_icon-translate-y-active);
+      rotate: calc(var(--_icon-rotate-active) * -1);
+    }
+  }
+
+  &:focus-visible {
+    --_background-color: var(--_background-hoverable);
+    --gradient-alpha: 0%;
+
+    border-color: var(--_border-color-hoverable);
+    color: var(--_foreground-hoverable);
+
+    &::before {
+      translate: 0 calc(var(--_icon-translate-y-hoverable) * -1);
+      rotate: var(--_icon-rotate-hoverable);
+    }
+
+    &::after {
+      translate: 0 var(--_icon-translate-y-hoverable);
+      rotate: calc(var(--_icon-rotate-hoverable) * -1);
+    }
+  }
+
+  &:enabled:hover {
+    @media (any-hover: hover) {
+      --_background-color: var(--_background-hoverable);
+      --gradient-alpha: 0%;
+
+      border-color: var(--_border-color-hoverable);
+      color: var(--_foreground-hoverable);
+
+      &::before {
+        translate: 0 calc(var(--_icon-translate-y-hoverable) * -1);
+        rotate: var(--_icon-rotate-hoverable);
+      }
+
+      &::after {
+        translate: 0 var(--_icon-translate-y-hoverable);
+        rotate: calc(var(--_icon-rotate-hoverable) * -1);
+      }
+    }
+  }
+}
+
+.body {
+  position: fixed;
+  inset: 0;
+  display: block grid;
+  overflow: auto;
+  overscroll-behavior-block: contain;
+  background-color: var(--color-lightest);
+  scrollbar-gutter: stable;
+  transition-duration: var(--duration-relaxed);
+  transition-property: display, opacity;
+  transition-timing-function: var(--ease-out-expo);
+  transition-behavior: allow-discrete;
+
+  @media (768px <= width) {
+    --_content-width: 1108px;
+  }
+
+  @starting-style {
+    opacity: 0;
+  }
+
+  &[hidden] {
+    opacity: 0;
+  }
+}
+
+.sidebar {
+  --_breakpoint: calc(768 * var(--rem));
+  --_static-column: calc(400 * var(--rem));
+  --_fluid-column: calc(var(--_breakpoint) - var(--_static-column));
+
+  display: block flex;
+  reading-flow: flex-visual;
+  grid-area: sidebar;
+  flex-wrap: wrap;
+  column-gap: min(40px, 40 * var(--fluid-max));
+
+  & > :where(:first-child) {
+    flex: 1 1 var(--_static-column);
+  }
+
+  & > :where(:last-child) {
+    flex: 9999 1 var(--_fluid-column);
+  }
+}
+
+.menu {
+  --_marker-size: calc(8 * var(--rem));
+
+  display: block grid;
+  row-gap: 24px;
+  align-self: start;
+
+  @media (768px <= width) {
+    row-gap: 32px;
+  }
+}
+
+.menuItem {
+  display: block grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0 calc(8 * var(--rem));
+  line-height: var(--leading-relaxed);
+}
+
+.link {
+  inline-size: fit-content;
+  color: var(--_foreground-default);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-wider);
+  text-wrap: pretty;
+  text-decoration-line: revert;
+  transition:
+    color var(--duration-default),
+    text-decoration-color var(--duration-rapidly);
+
+  &:focus-visible {
+    color: var(--_foreground-hoverable);
+    text-decoration-color: transparent;
+  }
+
+  &:any-link:hover {
+    @media (any-hover: hover) {
+      color: var(--_foreground-hoverable);
+      text-decoration-color: transparent;
+    }
+  }
+}
+
+.stack {
+  align-self: end;
+
+  & > * {
+    margin-inline: auto;
+  }
+
+  & > * + * {
+    margin-block-start: -20px;
+  }
+}

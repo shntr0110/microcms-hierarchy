@@ -1,0 +1,176 @@
+/* ======================================================
+//
+//  MARK: Elements
+//
+//  このセクションでは、リセットスタイルとは別にタイプセレクタや属性セレクタなどにグローバルな固有スタイルを適用します。
+//  予期せぬスタイルの適用を招くため、適用するスタイルは最小限に抑えます。
+//
+// ====================================================== */
+
+:where(:root) {
+  background-color: var(--color-shaded-white);
+  color: var(--color-primary);
+  font-family: var(--font-gothic);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-normal);
+  text-spacing-trim: trim-start;
+  text-autospace: normal;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  text-underline-offset: 0.3em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+    interpolate-size: allow-keywords;
+  }
+
+  &:lang(ja) {
+    font-feature-settings: 'pkna';
+    font-kerning: none;
+  }
+
+  &:lang(en) {
+    font-kerning: normal;
+    text-wrap: pretty;
+    hyphens: auto;
+  }
+
+  &:has(:modal) {
+    /* モーダルが開いているときにドキュメントのスクロールを防止 */
+    /* `overflow: clip` は Firefox で動作しない */
+    overflow: hidden;
+  }
+}
+
+:where(body) {
+  font-size: var(--font-size-base);
+}
+
+:where(:root, body) {
+  overflow-inline: clip;
+
+  @supports not (overflow-inline: clip) {
+    overflow-x: clip; /* `overflow-inline`をサポートしていないブラウザで水平スクロールを防止 */
+  }
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-weight: var(--font-bold);
+  font-kerning: normal;
+  text-wrap: pretty;
+
+  &:lang(ja) {
+    font-feature-settings: 'palt';
+    word-break: auto-phrase;
+  }
+}
+
+:where(:any-link) {
+  text-decoration-color: color-mix(in sRGB, currentColor, transparent 30%); /* 下線の色を調整 */
+}
+
+:where(time, pre, input, textarea) {
+  text-autospace: no-autospace;
+}
+
+:where(pre) {
+  tab-size: 2;
+
+  @media print {
+    /* 印刷時に<pre>要素内のテキストを折り返す */
+    white-space: pre-wrap;
+  }
+}
+
+:where(cite, dfn) {
+  --_quotation-start: '"';
+  --_quotation-end: '"';
+
+  &::before {
+    /* <cite>および<dfn>要素のコンテンツの前に、オーバーライドされない限り
+       デフォルトでダブルクォートを挿入 */
+    content: var(--_quotation-start);
+  }
+
+  &::after {
+    /* <cite>および<dfn>要素のコンテンツの後に、オーバーライドされない限り
+       デフォルトでダブルクォートを挿入 */
+    content: var(--_quotation-end);
+  }
+
+  &:where(:lang(ja)) {
+    /* 日本語での<cite>および<dfn>要素のデフォルトの引用符を
+       日本語の開始引用符「」で上書き */
+    --_quotation-start: '「';
+    --_quotation-end: '」';
+  }
+}
+
+:where(mark) {
+  @media (forced-colors: none) {
+    /* デフォルトの背景色を削除 */
+    background-color: unset;
+    /* テキストの色をデフォルトまたは継承された値にリセット */
+    color: unset;
+
+    /* テキストを強調するために下線を適用 */
+    text-decoration-line: underline;
+
+    /* 'Mark'色と透明度の混合を使用して下線の色を設定 */
+    text-decoration-color: oklch(from #ff0 l c h / 50%);
+
+    /* 下線の太さを指定 */
+    text-decoration-thickness: 0.4em;
+
+    /* 下線の位置をテキストに近づけるように調整 */
+    text-underline-offset: -0.2em;
+
+    /* g、j、p、q、yなどの文字の下降部によって下線が途切れないようにする */
+    text-decoration-skip-ink: none;
+  }
+}
+
+:where(ins):not(:where(.adsbygoogle)) {
+  /* 挿入されたコンテンツを明確に表示するために破線での下線を使用 */
+  text-decoration-style: dashed;
+
+  /* 可読性を向上させるため、下線をテキストから少し離して配置 */
+  text-underline-offset: 0.4em;
+
+  /* より良い読みやすさのために下線が下降部をスキップするように調整 */
+  text-decoration-skip-ink: auto;
+}
+
+:where(del) {
+  /* 削除されたコンテンツの視認性を高めるために二重線を適用 */
+  text-decoration-style: double;
+}
+
+:where([id], :focus) {
+  scroll-margin-block-start: var(--scroll-margin-block, 80px);
+}
+
+:where(:focus-visible) {
+  outline: 2px solid var(--color-ring);
+}
+
+:not([data-safe-animation]) {
+  &,
+  &::before,
+  &::after,
+  &::backdrop {
+    @media (prefers-reduced-motion: reduce) {
+      /* モーション軽減を好むユーザーのためにアニメーションとトランジションを無効化 */
+      background-attachment: unset !important;
+      scroll-behavior: unset !important;
+      transition-delay: unset !important;
+      transition-duration: 1ms !important;
+      animation-duration: 1ms !important;
+      animation-delay: unset !important;
+      animation-iteration-count: unset !important;
+      view-transition-name: none !important;
+    }
+  }
+}

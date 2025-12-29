@@ -1,0 +1,42 @@
+---
+import styles from './Pagination.module.scss'
+
+export type Props = {
+  totalPages: number
+  currentPage: number
+  basePath: string
+}
+
+const { totalPages, currentPage, basePath = '/' } = Astro.props
+
+const createPageUrl = (page: number) => {
+  return page === 1 ? `${basePath}` : `${basePath}page/${page}`
+}
+---
+
+<nav aria-label="ページ番号" class={styles.pagination}>
+  <div class={styles.prev}>
+    <!-- 前へボタン -->
+    <!-- {
+      currentPage > 1 && ( -->
+    <a href={createPageUrl(currentPage - 1)} aria-label="前のページ"> </a>
+    <!-- )
+    } -->
+  </div>
+  <!-- 次へボタン -->
+  <div class={styles.next}>
+    {currentPage < totalPages && <a href={createPageUrl(currentPage + 1)} />}
+  </div>
+  <!-- ページ番号 -->
+  <ol class={styles.numbers}>
+    {
+      Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+        <li>
+          <a href={createPageUrl(page)} aria-current={page === currentPage ? 'page' : undefined}>
+            {page}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
