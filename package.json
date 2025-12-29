@@ -48,7 +48,7 @@
     "@markuplint/ml-config": "^4.7.2",
     "@markuplint/react-spec": "^4.5.5",
     "@types/react": "^18.3.3",
-    "globals": "^15.6.0",
+    "globals": "^16.5.0",
     "markuplint": "^4.9.2",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
