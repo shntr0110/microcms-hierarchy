@@ -1,0 +1,29 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Header from '@/components/Header/Header.astro'
+import Footer from '@/components/Footer/Footer.astro'
+import { fetchAllPages, buildChildrenMap, generateAllPathsFromMap, getPageById } from '@/lib/microcms/pages/api.ts'
+
+export async function getStaticPaths() {
+  const pages = await fetchAllPages()
+  const map = buildChildrenMap(pages)
+  const entries = generateAllPathsFromMap(map)
+
+  return entries.map(({ fullPath, pageId }) => ({
+    params: { slug: fullPath },
+    props: { pageId }
+  }))
+}
+
+const { pageId } = Astro.props
+const page = await getPageById(pageId)
+---
+
+<Layout>
+  <Header />
+  <main>
+    {page.parent && <p>{page.parent.title}</p>}
+    <p>{page.title}</p>
+  </main>
+  <Footer />
+</Layout>

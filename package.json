@@ -33,6 +33,7 @@
     "astro-seo": "^0.8.4",
     "clsx": "^2.1.1",
     "lucide-react": "^0.399.0",
+    "microcms-js-sdk": "^3.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.57.0",
