@@ -6,13 +6,35 @@ import Header from '@/components/Header/Header.astro'
 import Footer from '@/components/Footer/Footer.astro'
 import { getPageByIdPreview } from '@/lib/microcms/pages/api.ts'
 
-// クエリ取得
 const url = new URL(Astro.request.url)
-const contentId = url.searchParams.get('contentId')
-const draftKey = url.searchParams.get('draftKey')
+const sp = url.searchParams
+
+// 複数候補を許容（microCMS設定に合わせて）
+const contentId = sp.get('contentId') ?? sp.get('id') ?? sp.get('content_id') ?? sp.get('CONTENT_ID')
+
+const draftKey = sp.get('draftKey') ?? sp.get('draft_key') ?? sp.get('DRAFT_KEY')
 
 if (!contentId || !draftKey) {
-  return new Response('Missing contentId or draftKey', { status: 400 })
+  const keys = Array.from(sp.keys())
+  const masked = (v) => (v ? `${v.slice(0, 4)}…` : null)
+
+  return new Response(
+    JSON.stringify(
+      {
+        message: 'Missing contentId or draftKey',
+        receivedPath: url.pathname,
+        receivedQueryKeys: keys,
+        received: {
+          contentId,
+          draftKey: masked(draftKey)
+        },
+        hint: 'microCMSの画面プレビュー遷移先URLで ?contentId={CONTENT_ID}&draftKey={DRAFT_KEY} のように設定してください'
+      },
+      null,
+      2
+    ),
+    { status: 400, headers: { 'content-type': 'application/json; charset=utf-8' } }
+  )
 }
 
 // 下書き取得（draftKey付き）
