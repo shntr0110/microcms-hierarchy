@@ -16,7 +16,7 @@ const draftKey = sp.get('draftKey') ?? sp.get('draft_key') ?? sp.get('DRAFT_KEY'
 
 if (!contentId || !draftKey) {
   const keys = Array.from(sp.keys())
-  const masked = (v) => (v ? `${v.slice(0, 4)}…` : null)
+  const masked = (v: string | null) => (v ? `${v.slice(0, 4)}…` : null)
 
   return new Response(
     JSON.stringify(
