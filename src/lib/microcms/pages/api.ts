@@ -78,3 +78,11 @@ export const generateAllPathsFromMap = (
 export const getPageById = async (pageId: string): Promise<Page> => {
   return await client.getListDetail({ endpoint: 'pages', contentId: pageId })
 }
+
+export const getPageByIdPreview = async (pageId: string, draftKey: string): Promise<Page> => {
+  return await client.getListDetail({
+    endpoint: 'pages',
+    contentId: pageId,
+    queries: { draftKey }
+  })
+}

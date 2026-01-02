@@ -1,0 +1,32 @@
+---
+export const prerender = false
+
+import Layout from '@/layouts/Layout.astro'
+import Header from '@/components/Header/Header.astro'
+import Footer from '@/components/Footer/Footer.astro'
+import { getPageByIdPreview } from '@/lib/microcms/pages/api.ts'
+
+// クエリ取得
+const url = new URL(Astro.request.url)
+const contentId = url.searchParams.get('contentId')
+const draftKey = url.searchParams.get('draftKey')
+
+if (!contentId || !draftKey) {
+  return new Response('Missing contentId or draftKey', { status: 400 })
+}
+
+// 下書き取得（draftKey付き）
+const page = await getPageByIdPreview(contentId, draftKey)
+
+// キャッシュ無効（プレビューなので）
+Astro.response.headers.set('Cache-Control', 'no-store')
+---
+
+<Layout>
+  <Header />
+  <main>
+    {page.parent && <p>{page.parent.title}</p>}
+    <p>{page.title}</p>
+  </main>
+  <Footer />
+</Layout>
